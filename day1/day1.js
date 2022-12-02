@@ -1,19 +1,5 @@
-const events = require('events');
 const fs = require('fs');
-const readline = require('readline');
-
-async function readLines(stream) {
-  const rl = readline.createInterface({
-    input: stream,
-    crlfDelay: Infinity,
-  });
-  return new Promise((resolve) => {
-    stream.once('error', (_) => resolve(null));
-    const lines = [];
-    rl.on('line', (line) => lines.push(line));
-    rl.on('close', (_) => resolve(lines));
-  });
-}
+const { readLines } = require('../common/readLines');
 
 async function countMaxCalories() {
   const lines = await readLines(fs.createReadStream('input.txt'));
